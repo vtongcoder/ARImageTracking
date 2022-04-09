@@ -17,6 +17,7 @@ struct ContentView : View {
 }
 
 struct ARViewContainer: UIViewRepresentable {
+    @State var videoUrl: String = ""
     var arView = ARView(frame: .zero)
 
     func makeCoordinator() -> Coordinator {
@@ -37,30 +38,65 @@ struct ARViewContainer: UIViewRepresentable {
                 return
             }
             
-            //Assigns video to be overlaid
-            guard let path = Bundle.main.path(forResource: "iphonevideo", ofType: "mp4") else {
-                print("Unable to find video file.")
-                return
-            }
             
-            let videoURL = URL(fileURLWithPath: path)
-            let playerItem = AVPlayerItem(url: videoURL)
-            videoPlayer = AVPlayer(playerItem: playerItem)
-            let videoMaterial = VideoMaterial(avPlayer: videoPlayer)
 
-			// size of video plane depending of the image
-			let width: Float = Float(imageAnchor.referenceImage.physicalSize.width * 1.03)
-			let height: Float = Float(imageAnchor.referenceImage.physicalSize.height * 1.03)
+			
 
-            //Sets the aspect ratio of the video to be played, and the corner radius of the video
-            let videoPlane = ModelEntity(mesh: .generatePlane(width: width, depth: height, cornerRadius: 0.3), materials: [videoMaterial])
+            
             
             //Assigns reference image that will be detected
             if let imageName = imageAnchor.name, imageName  == "xs" {
+                    // size of video plane depending of the image
+                let width: Float = Float(imageAnchor.referenceImage.physicalSize.width * 1.03)
+                let height: Float = Float(imageAnchor.referenceImage.physicalSize.height * 1.03)
+                   
+                    //Assigns video to be overlaid
+                guard let path = Bundle.main.path(forResource: "iphonevideo", ofType: "mp4") else {
+                    print("Unable to find video file.")
+                    return
+                }
+                print("Dectect iphone")
+                
+                let videoURL = URL(fileURLWithPath: path)
+                let playerItem = AVPlayerItem(url: videoURL)
+                videoPlayer = AVPlayer(playerItem: playerItem)
+                let videoMaterial = VideoMaterial(avPlayer: videoPlayer)
+                    //Sets the aspect ratio of the video to be played, and the corner radius of the video
+                let videoPlane = ModelEntity(mesh: .generatePlane(width: width, depth: height, cornerRadius: 0.3), materials: [videoMaterial])
+                //
+                
                 let anchor = AnchorEntity(anchor: imageAnchor)
                 //Adds specified video to the anchor
                 anchor.addChild(videoPlane)
                 parent.arView.scene.addAnchor(anchor)
+            }
+            
+            if let imageName = imageAnchor.name, imageName  == "MoringaBox" {
+                    // size of video plane depending of the image
+                let width: Float = Float(imageAnchor.referenceImage.physicalSize.width * 1.03)
+                let height: Float = Float(imageAnchor.referenceImage.physicalSize.height * 1.03)
+                
+                    //Assigns video to be overlaid
+                guard let path = Bundle.main.path(forResource: "Dory", ofType: "mov") else {
+                    print("Unable to find video file.")
+                    return
+                }
+                
+                print("Dectect Moringa")
+                let videoURL = URL(fileURLWithPath: path)
+                let playerItem = AVPlayerItem(url: videoURL)
+                videoPlayer = AVPlayer(playerItem: playerItem)
+                let videoMaterial = VideoMaterial(avPlayer: videoPlayer)
+                    //Sets the aspect ratio of the video to be played, and the corner radius of the video
+                let videoPlane = ModelEntity(mesh: .generatePlane(width: width, depth: height), materials: [videoMaterial])
+                    //
+                
+                let anchor = AnchorEntity(anchor: imageAnchor)
+                    //Adds specified video to the anchor
+                anchor.addChild(videoPlane)
+                parent.arView.scene.addAnchor(anchor)
+                
+                
             }
         }
         

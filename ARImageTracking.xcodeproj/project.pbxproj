@@ -12,6 +12,7 @@
 		43653C9125A853E800AD9879 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43653C9025A853E800AD9879 /* Assets.xcassets */; };
 		43653C9425A853E800AD9879 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43653C9325A853E800AD9879 /* Preview Assets.xcassets */; };
 		43653C9D25A854E400AD9879 /* iphonevideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 43653C9C25A854E400AD9879 /* iphonevideo.mp4 */; };
+		C5A5A1E2280149550042C24C /* Dory.mov in Resources */ = {isa = PBXBuildFile; fileRef = C5A5A1E1280149550042C24C /* Dory.mov */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		43653C9325A853E800AD9879 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		43653C9525A853E800AD9879 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43653C9C25A854E400AD9879 /* iphonevideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iphonevideo.mp4; sourceTree = "<group>"; };
+		C5A5A1E1280149550042C24C /* Dory.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = Dory.mov; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				43653C8A25A853E400AD9879 /* AppDelegate.swift */,
 				43653C8C25A853E400AD9879 /* ContentView.swift */,
+				C5A5A1E1280149550042C24C /* Dory.mov */,
 				43653C9C25A854E400AD9879 /* iphonevideo.mp4 */,
 				43653C9025A853E800AD9879 /* Assets.xcassets */,
 				43653C9525A853E800AD9879 /* Info.plist */,
@@ -131,6 +134,7 @@
 			files = (
 				43653C9425A853E800AD9879 /* Preview Assets.xcassets in Resources */,
 				43653C9125A853E800AD9879 /* Assets.xcassets in Resources */,
+				C5A5A1E2280149550042C24C /* Dory.mov in Resources */,
 				43653C9D25A854E400AD9879 /* iphonevideo.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,7 +277,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ARImageTracking/Preview Content\"";
-				DEVELOPMENT_TEAM = GGXD5E6AF8;
+				DEVELOPMENT_TEAM = K4TU4EW2V3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ARImageTracking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -294,7 +298,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"ARImageTracking/Preview Content\"";
-				DEVELOPMENT_TEAM = GGXD5E6AF8;
+				DEVELOPMENT_TEAM = K4TU4EW2V3;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = ARImageTracking/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

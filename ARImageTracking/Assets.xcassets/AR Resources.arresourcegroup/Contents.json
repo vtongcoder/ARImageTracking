@@ -5,6 +5,9 @@
   },
   "resources" : [
     {
+      "filename" : "MoringaBox.arreferenceimage"
+    },
+    {
       "filename" : "xs.arreferenceimage"
     }
   ]
