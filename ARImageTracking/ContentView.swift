@@ -17,7 +17,7 @@ struct ContentView : View {
 }
 
 struct ARViewContainer: UIViewRepresentable {
-    @State var videoUrl: String = ""
+    
     var arView = ARView(frame: .zero)
 
     func makeCoordinator() -> Coordinator {
@@ -37,21 +37,14 @@ struct ARViewContainer: UIViewRepresentable {
                 print("Problems loading anchor.")
                 return
             }
-            
-            
-
-			
-
-            
-            
             //Assigns reference image that will be detected
             if let imageName = imageAnchor.name, imageName  == "xs" {
+                parent.arView.scene.anchors.removeAll()
                     // size of video plane depending of the image
                 let width: Float = Float(imageAnchor.referenceImage.physicalSize.width * 1.03)
                 let height: Float = Float(imageAnchor.referenceImage.physicalSize.height * 1.03)
-                   
-                    //Assigns video to be overlaid
-                guard let path = Bundle.main.path(forResource: "iphonevideo", ofType: "mp4") else {
+//                    //Assigns video to be overlaid
+                guard let path = Bundle.main.path(forResource: "iphonevideo", ofType: "mp4")else {
                     print("Unable to find video file.")
                     return
                 }
@@ -64,7 +57,7 @@ struct ARViewContainer: UIViewRepresentable {
                     //Sets the aspect ratio of the video to be played, and the corner radius of the video
                 let videoPlane = ModelEntity(mesh: .generatePlane(width: width, depth: height, cornerRadius: 0.3), materials: [videoMaterial])
                 //
-                
+
                 let anchor = AnchorEntity(anchor: imageAnchor)
                 //Adds specified video to the anchor
                 anchor.addChild(videoPlane)
@@ -72,7 +65,10 @@ struct ARViewContainer: UIViewRepresentable {
             }
             
             if let imageName = imageAnchor.name, imageName  == "MoringaBox" {
-                    // size of video plane depending of the image
+                // remove previous anchor
+                
+                parent.arView.scene.anchors.removeAll()
+                
                 let width: Float = Float(imageAnchor.referenceImage.physicalSize.width * 1.03)
                 let height: Float = Float(imageAnchor.referenceImage.physicalSize.height * 1.03)
                 
@@ -83,6 +79,7 @@ struct ARViewContainer: UIViewRepresentable {
                 }
                 
                 print("Dectect Moringa")
+                
                 let videoURL = URL(fileURLWithPath: path)
                 let playerItem = AVPlayerItem(url: videoURL)
                 videoPlayer = AVPlayer(playerItem: playerItem)
@@ -90,7 +87,6 @@ struct ARViewContainer: UIViewRepresentable {
                     //Sets the aspect ratio of the video to be played, and the corner radius of the video
                 let videoPlane = ModelEntity(mesh: .generatePlane(width: width, depth: height), materials: [videoMaterial])
                     //
-                
                 let anchor = AnchorEntity(anchor: imageAnchor)
                     //Adds specified video to the anchor
                 anchor.addChild(videoPlane)
@@ -98,6 +94,22 @@ struct ARViewContainer: UIViewRepresentable {
                 
                 
             }
+            
+//            let width: Float = Float(imageAnchor.referenceImage.physicalSize.width * 1.03)
+//            let height: Float = Float(imageAnchor.referenceImage.physicalSize.height * 1.03)
+//
+//            let videoURL = URL(fileURLWithPath: videoPath)
+//            let playerItem = AVPlayerItem(url: videoURL)
+//            videoPlayer = AVPlayer(playerItem: playerItem)
+//            let videoMaterial = VideoMaterial(avPlayer: videoPlayer)
+//                //Sets the aspect ratio of the video to be played, and the corner radius of the video
+//            let videoPlane = ModelEntity(mesh: .generatePlane(width: width, depth: height), materials: [videoMaterial])
+//                //
+//
+//            let anchor = AnchorEntity(anchor: imageAnchor)
+//                //Adds specified video to the anchor
+//            anchor.addChild(videoPlane)
+//            parent.arView.scene.addAnchor(anchor)
         }
         
         //Checks for tracking status
