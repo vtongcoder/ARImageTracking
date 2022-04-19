@@ -23,7 +23,6 @@ struct ContentView : View {
 }
 
 struct ARViewContainer: UIViewRepresentable {
-    @State private var selectedModel: String?
     var arView = ARView(frame: .zero)
 
     func makeCoordinator() -> Coordinator {
@@ -35,7 +34,9 @@ struct ARViewContainer: UIViewRepresentable {
         var videoPlayer: AVPlayer!
         
         init(parent: ARViewContainer) {
+            
             self.parent = parent
+            
         }
         
         func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
@@ -46,6 +47,15 @@ struct ARViewContainer: UIViewRepresentable {
             guard let imageName = imageAnchor.name else {
                 return
             }
+            
+//            let config = ARWorldTrackingConfiguration()
+//            config.planeDetection = [.horizontal, .vertical]
+//            if ARWorldTrackingConfiguration.supportsSceneReconstruction(.mesh) {
+//                config.sceneReconstruction = .mesh
+//            }
+//            session.run(config, options: [])
+//
+            
             //Assigns reference image that will be detected
             if imageName  == "xs" {
                 parent.arView.scene.anchors.removeAll()
@@ -104,8 +114,6 @@ struct ARViewContainer: UIViewRepresentable {
                 
             }
             if imageName == "PixyPE" {
-                // Pixy F link: https://youtu.be/ofc3bCR-ZrM
-                parent.selectedModel = "PixyPE"
                 parent.arView.scene.anchors.removeAll()
 
                 let width: Float = Float(imageAnchor.referenceImage.physicalSize.width * 1.03)
@@ -127,13 +135,21 @@ struct ARViewContainer: UIViewRepresentable {
                 let anchor = AnchorEntity(anchor: imageAnchor)
                     //Adds specified video to the anchor
 //                anchor.addChild(videoPlane)
-                let modelFileName = "toy_biplane.usdz"
-                let gimbalEntity = try! ModelEntity.loadModel(named: modelFileName)
-                let gimbalAnchorEntity = AnchorEntity(plane: .horizontal)
-                                    gimbalAnchorEntity.position.z = 1.0
-                anchor.addChild(gimbalEntity)
-//                gimbalAnchorEntity.addChild(gimbalEntity)
-//                parent.arView.scene.addAnchor(gimbalAnchorEntity)
+                //Test code: add 3D model
+//                let modelFileName = "pixyPE.usdz"
+//                let gimbalEntity = try! ModelEntity.loadModel(named: modelFileName)
+//                let gimbalAnchorEntity = AnchorEntity(plane: .horizontal)
+//                                    gimbalAnchorEntity.position.z = 1.0
+                
+                //Load Reality project
+                let pixy = try! GimbalPixy.loadScene()
+//                let biplane = try! ToyBiplane.loadToy()
+//                biplane.position.y = 0.2
+//
+//                anchor.addChild(biplane)
+
+                anchor.addChild(pixy)
+                
                 parent.arView.scene.addAnchor(anchor)
                 
                                   
@@ -202,16 +218,7 @@ struct ARViewContainer: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: ARView, context: Context) {
-        if let modelName = selectedModel {
-            if modelName == "PixyPE" {
-                print("Load model")
-
-                
-                let biPlane = try! ToyBiplane.loadToy()
-                uiView.scene.addAnchor(biPlane)
-            }
-           
-        }
+     
         
     }
 }
