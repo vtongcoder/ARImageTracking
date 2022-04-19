@@ -126,14 +126,14 @@ struct ARViewContainer: UIViewRepresentable {
 //                    //
                 let anchor = AnchorEntity(anchor: imageAnchor)
                     //Adds specified video to the anchor
-                anchor.addChild(videoPlane)
+//                anchor.addChild(videoPlane)
                 let modelFileName = "toy_biplane.usdz"
                 let gimbalEntity = try! ModelEntity.loadModel(named: modelFileName)
                 let gimbalAnchorEntity = AnchorEntity(plane: .horizontal)
                                     gimbalAnchorEntity.position.z = 1.0
-//                anchor.addChild(gimbalEntity)
-                gimbalAnchorEntity.addChild(gimbalEntity)
-                parent.arView.scene.addAnchor(gimbalAnchorEntity)
+                anchor.addChild(gimbalEntity)
+//                gimbalAnchorEntity.addChild(gimbalEntity)
+//                parent.arView.scene.addAnchor(gimbalAnchorEntity)
                 parent.arView.scene.addAnchor(anchor)
                 
                                   
