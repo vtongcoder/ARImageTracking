@@ -12,12 +12,18 @@ import RealityKit
 //Displays as a SwiftUI View
 struct ContentView : View {
     var body: some View {
-        return ARViewContainer().edgesIgnoringSafeArea(.all)
+        return ZStack {
+            ARViewContainer().edgesIgnoringSafeArea(.all)
+            VStack {
+                Text("Scan to find image")
+                Spacer()
+            }
+        }
     }
 }
 
 struct ARViewContainer: UIViewRepresentable {
-    
+    @State private var selectedModel: String?
     var arView = ARView(frame: .zero)
 
     func makeCoordinator() -> Coordinator {
@@ -99,29 +105,40 @@ struct ARViewContainer: UIViewRepresentable {
             }
             if imageName == "PixyPE" {
                 // Pixy F link: https://youtu.be/ofc3bCR-ZrM
-                
+                parent.selectedModel = "PixyPE"
                 parent.arView.scene.anchors.removeAll()
-                
+
                 let width: Float = Float(imageAnchor.referenceImage.physicalSize.width * 1.03)
                 let height: Float = Float(imageAnchor.referenceImage.physicalSize.height * 1.03)
-                
+
                     //Assigns video to be overlaid
                 guard let path = Bundle.main.path(forResource: "Dory", ofType: "mov") else {
                     print("Unable to find video file.")
                     return
                 }
-                
+
                 let videoURL =  URL(fileURLWithPath: path)
                 let playerItem = AVPlayerItem(url: videoURL)
                 videoPlayer = AVPlayer(playerItem: playerItem)
                 let videoMaterial = VideoMaterial(avPlayer: videoPlayer)
-                    //Sets the aspect ratio of the video to be played, and the corner radius of the video
+//                    //Sets the aspect ratio of the video to be played, and the corner radius of the video
                 let videoPlane = ModelEntity(mesh: .generatePlane(width: width, depth: height), materials: [videoMaterial])
-                    //
+//                    //
                 let anchor = AnchorEntity(anchor: imageAnchor)
                     //Adds specified video to the anchor
                 anchor.addChild(videoPlane)
+                let modelFileName = "toy_biplane.usdz"
+                let gimbalEntity = try! ModelEntity.loadModel(named: modelFileName)
+                let gimbalAnchorEntity = AnchorEntity(plane: .horizontal)
+                                    gimbalAnchorEntity.position.z = 1.0
+//                anchor.addChild(gimbalEntity)
+                gimbalAnchorEntity.addChild(gimbalEntity)
+                parent.arView.scene.addAnchor(gimbalAnchorEntity)
                 parent.arView.scene.addAnchor(anchor)
+                
+                                  
+
+                
             }
             
             
@@ -150,7 +167,7 @@ struct ARViewContainer: UIViewRepresentable {
                 return
             }
             
-            //Plays/pauses the video when tracked/loses tracking
+//            Plays/pauses the video when tracked/loses tracking
             if imageAnchor.isTracked {
                 videoPlayer.play()
             } else {
@@ -184,6 +201,18 @@ struct ARViewContainer: UIViewRepresentable {
         return arView
     }
     
-    func updateUIView(_ uiView: ARView, context: Context) {}
+    func updateUIView(_ uiView: ARView, context: Context) {
+        if let modelName = selectedModel {
+            if modelName == "PixyPE" {
+                print("Load model")
+
+                
+                let biPlane = try! ToyBiplane.loadToy()
+                uiView.scene.addAnchor(biPlane)
+            }
+           
+        }
+        
+    }
 }
 
