@@ -37,8 +37,11 @@ struct ARViewContainer: UIViewRepresentable {
                 print("Problems loading anchor.")
                 return
             }
+            guard let imageName = imageAnchor.name else {
+                return
+            }
             //Assigns reference image that will be detected
-            if let imageName = imageAnchor.name, imageName  == "xs" {
+            if imageName  == "xs" {
                 parent.arView.scene.anchors.removeAll()
                     // size of video plane depending of the image
                 let width: Float = Float(imageAnchor.referenceImage.physicalSize.width * 1.03)
@@ -64,7 +67,7 @@ struct ARViewContainer: UIViewRepresentable {
                 parent.arView.scene.addAnchor(anchor)
             }
             
-            if let imageName = imageAnchor.name, imageName  == "MoringaBox" {
+            if imageName  == "MoringaBox" {
                 // remove previous anchor
                 
                 parent.arView.scene.anchors.removeAll()
@@ -94,6 +97,34 @@ struct ARViewContainer: UIViewRepresentable {
                 
                 
             }
+            if imageName == "PixyPE" {
+                // Pixy F link: https://youtu.be/ofc3bCR-ZrM
+                
+                parent.arView.scene.anchors.removeAll()
+                
+                let width: Float = Float(imageAnchor.referenceImage.physicalSize.width * 1.03)
+                let height: Float = Float(imageAnchor.referenceImage.physicalSize.height * 1.03)
+                
+                    //Assigns video to be overlaid
+                guard let path = Bundle.main.path(forResource: "Dory", ofType: "mov") else {
+                    print("Unable to find video file.")
+                    return
+                }
+                
+                let videoURL =  URL(fileURLWithPath: path)
+                let playerItem = AVPlayerItem(url: videoURL)
+                videoPlayer = AVPlayer(playerItem: playerItem)
+                let videoMaterial = VideoMaterial(avPlayer: videoPlayer)
+                    //Sets the aspect ratio of the video to be played, and the corner radius of the video
+                let videoPlane = ModelEntity(mesh: .generatePlane(width: width, depth: height), materials: [videoMaterial])
+                    //
+                let anchor = AnchorEntity(anchor: imageAnchor)
+                    //Adds specified video to the anchor
+                anchor.addChild(videoPlane)
+                parent.arView.scene.addAnchor(anchor)
+            }
+            
+            
             
 //            let width: Float = Float(imageAnchor.referenceImage.physicalSize.width * 1.03)
 //            let height: Float = Float(imageAnchor.referenceImage.physicalSize.height * 1.03)
