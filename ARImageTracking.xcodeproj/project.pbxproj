@@ -12,6 +12,7 @@
 		43653C9125A853E800AD9879 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43653C9025A853E800AD9879 /* Assets.xcassets */; };
 		43653C9425A853E800AD9879 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43653C9325A853E800AD9879 /* Preview Assets.xcassets */; };
 		43653C9D25A854E400AD9879 /* iphonevideo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 43653C9C25A854E400AD9879 /* iphonevideo.mp4 */; };
+		C562E11C281B4A580090B73D /* Growing Up - Dory.mov in Resources */ = {isa = PBXBuildFile; fileRef = C562E11B281B4A580090B73D /* Growing Up - Dory.mov */; };
 		C58B399F280E4A4D006066E9 /* toy_biplane.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C58B399E280E4A4D006066E9 /* toy_biplane.usdz */; };
 		C58B39A1280E5140006066E9 /* toy_biplane.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C58B39A0280E5140006066E9 /* toy_biplane.rcproject */; };
 		C58B39A3280E5995006066E9 /* pixyPE.usdz in Resources */ = {isa = PBXBuildFile; fileRef = C58B39A2280E5995006066E9 /* pixyPE.usdz */; };
@@ -27,6 +28,7 @@
 		43653C9325A853E800AD9879 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		43653C9525A853E800AD9879 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43653C9C25A854E400AD9879 /* iphonevideo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = iphonevideo.mp4; sourceTree = "<group>"; };
+		C562E11B281B4A580090B73D /* Growing Up - Dory.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = "Growing Up - Dory.mov"; sourceTree = "<group>"; };
 		C58B399E280E4A4D006066E9 /* toy_biplane.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = toy_biplane.usdz; sourceTree = "<group>"; };
 		C58B39A0280E5140006066E9 /* toy_biplane.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = toy_biplane.rcproject; sourceTree = "<group>"; };
 		C58B39A2280E5995006066E9 /* pixyPE.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = pixyPE.usdz; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				43653C8A25A853E400AD9879 /* AppDelegate.swift */,
 				43653C8C25A853E400AD9879 /* ContentView.swift */,
 				C5A5A1E1280149550042C24C /* Dory.mov */,
+				C562E11B281B4A580090B73D /* Growing Up - Dory.mov */,
 				43653C9C25A854E400AD9879 /* iphonevideo.mp4 */,
 				43653C9025A853E800AD9879 /* Assets.xcassets */,
 				43653C9525A853E800AD9879 /* Info.plist */,
@@ -154,6 +157,7 @@
 			files = (
 				C58B39A3280E5995006066E9 /* pixyPE.usdz in Resources */,
 				43653C9425A853E800AD9879 /* Preview Assets.xcassets in Resources */,
+				C562E11C281B4A580090B73D /* Growing Up - Dory.mov in Resources */,
 				C58B399F280E4A4D006066E9 /* toy_biplane.usdz in Resources */,
 				43653C9125A853E800AD9879 /* Assets.xcassets in Resources */,
 				C5A5A1E2280149550042C24C /* Dory.mov in Resources */,

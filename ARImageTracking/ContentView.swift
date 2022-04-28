@@ -89,15 +89,14 @@ struct ARViewContainer: UIViewRepresentable {
                 parent.arView.scene.anchors.removeAll()
                 
                 let width: Float = Float(imageAnchor.referenceImage.physicalSize.width * 1.03)
-                let height: Float = Float(imageAnchor.referenceImage.physicalSize.height * 1.03)
+                let height: Float = Float(imageAnchor.referenceImage.physicalSize.height * 1.6)
                 
                     //Assigns video to be overlaid
-                guard let path = Bundle.main.path(forResource: "Dory", ofType: "mov") else {
+                guard let path = Bundle.main.path(forResource: "Growing Up - Dory", ofType: "mov") else {
                     print("Unable to find video file.")
                     return
                 }
                 
-                print("Dectect Moringa")
                 
                 let videoURL = URL(fileURLWithPath: path)
                 let playerItem = AVPlayerItem(url: videoURL)
@@ -105,8 +104,10 @@ struct ARViewContainer: UIViewRepresentable {
                 let videoMaterial = VideoMaterial(avPlayer: videoPlayer)
                     //Sets the aspect ratio of the video to be played, and the corner radius of the video
                 let videoPlane = ModelEntity(mesh: .generatePlane(width: width, depth: height), materials: [videoMaterial])
+                videoPlane.transform.rotation *= simd_quatf(angle: .pi/4, axis: SIMD3<Float>(1,0,0))
                     //
                 let anchor = AnchorEntity(anchor: imageAnchor)
+                
                     //Adds specified video to the anchor
                 anchor.addChild(videoPlane)
                 parent.arView.scene.addAnchor(anchor)
